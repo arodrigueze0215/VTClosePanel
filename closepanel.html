@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Focusout</title>
+        <style>
+            button{
+                width: 100%;
+            }
+            .main{
+                width: 100%;
+                height: 900px;
+                background-color: bisque;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+            }
+                .main__children1{
+                    height: 100px;
+                    display: flex;
+                    flex-direction: column;                    
+                    margin: 50px;
+                  
+                    width: 50%;
+                    
+                }
+                    .main__children12{
+                        width: 100%;
+                        height: 100px;
+                        background-color:tomato;
+                        display: none;
+                        
+                    }
+        </style>
+    </head>
+    <body>
+        <div id="main" class="main">
+            <div class="main__children1">
+                <div class="container">
+                    <button id="btn">Menu one!!</button>
+                </div>
+                <div class="container">
+                    <div class="container main__children12" id="main__children12">
+                            <a>Hi, I am menu one</a>
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="main__children1">
+                <div class="container">
+                    <button id="btn1">Menu two!!</button>
+                </div>
+                <div class="container">
+                    <div class="container main__children12" id="main__children13">
+                        <a>Hi, I am menu two</a>
+                    </div>
+    
+                </div>
+
+            </div>
+            
+
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script>
+            var $main = $('.main');
+           function captchEvent(ev, className, classNameToHide){
+                var menus = document.getElementsByClassName(className);
+
+                let i =0;
+                for (const menu of menus) {
+                    if (menu.contains(ev.target)){
+                        i++;
+                    }
+                } // el ev.target pertenece a alguien que tiene la clase className ????
+                if (i===0) {
+                    $('.'+classNameToHide).css('display', 'none');
+                }
+            }
+            $main.on('click', ev=>captchEvent(ev, 'container','main__children12'));
+            $('#btn').on('click', (ev)=>{
+                //ev.stopPropagation();
+                $('#main__children12').css('display', 'block');
+            });
+            $('#btn1').on('click', (ev)=>{
+                //ev.stopPropagation();
+                $('#main__children13').css('display', 'block');
+            });
+
+        </script>
+    </body>
+</html>
